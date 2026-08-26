@@ -1,0 +1,29 @@
+generated: '2026-08-26'
+method: searched
+source: https://www.oncolens.com/llms.txt
+name: OncoLens rate limits
+description: >-
+  No rate limits are published, because no API is published. OncoLens has no developer
+  portal, no API reference and no machine-readable contract, so there is no documented
+  throttling policy, no published quota, and no response-header contract to record. An honest
+  zero, not an omission.
+limit_count: 0
+limits: []
+response_headers: []
+status_code_on_exhaustion: null
+retry_after_documented: false
+applicable: false
+applicable_reason: no-public-api
+probes:
+- url: https://www.oncolens.com/llms.txt
+  status: 200
+  note: Full published page inventory; contains no developer, API, or rate-limit page.
+- url: https://www.oncolens.com/api/
+  status: 404
+- url: https://docs.oncolens.com/
+  status: 0
+  note: DNS does not resolve.
+- url: https://developer.oncolens.com/
+  status: 0
+  note: DNS does not resolve.
+checked: '2026-08-26'

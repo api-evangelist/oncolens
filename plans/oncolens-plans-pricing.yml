@@ -1,0 +1,36 @@
+generated: '2026-08-26'
+method: searched
+source: https://www.oncolens.com/
+name: OncoLens plans and pricing
+description: >-
+  OncoLens publishes no pricing. There is no /pricing page, no plan tiers, no quotas and no
+  published rate card anywhere on the public site. Every commercial path on the site funnels
+  to a demo request or a sales contact form. This is an enterprise healthcare SaaS sold on
+  negotiated contracts to cancer programs, health systems and life science sponsors.
+plan_count: 0
+pricing_model: enterprise-contact-sales
+free_tier: false
+self_serve_signup: false
+plans: []
+commercial_surface:
+- label: Schedule A Demo
+  url: https://www.oncolens.com/schedule-a-demo/
+  http_status: 200
+- label: Contact Sales
+  url: https://www.oncolens.com/contact-us/
+  http_status: 200
+  contact: info@oncolens.com
+- label: Contact Support
+  url: https://www.oncolens.com/contact-us/
+  http_status: 200
+  contact: support@oncolens.com
+probes:
+- url: https://www.oncolens.com/pricing/
+  status: 404
+- url: https://www.oncolens.com/plans/
+  status: 404
+note: >-
+  Verified against the site's own published page inventory at
+  https://www.oncolens.com/llms.txt (HTTP 200), which lists every indexable page and contains
+  no pricing, plans, or billing page.
+checked: '2026-08-26'

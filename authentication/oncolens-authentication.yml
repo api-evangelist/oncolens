@@ -1,0 +1,124 @@
+generated: '2026-08-26'
+method: probed
+source: https://login.oncolens.com/.well-known/openid-configuration
+name: OncoLens authentication profile
+description: >-
+  OncoLens publishes no public API and no developer authentication documentation. What it
+  does serve, anonymously and on its own domain, is a complete OpenID Connect Discovery
+  document for the identity provider that fronts the customer application. This profile is
+  derived entirely from that document plus the observed sign-in redirect chain — it describes
+  how a human signs in to the OncoLens SaaS, not how a developer would authenticate against a
+  product API, because no product API is published.
+scope_of_this_artifact: user-sign-in-only
+api_authentication_documented: false
+api_authentication_note: >-
+  No developer portal, API reference, API key issuance flow, or partner authentication guide
+  exists on any OncoLens host. Access to the platform is through the application UI at
+  signin.oncolens.com.
+identity_provider:
+  issuer: https://login.oncolens.com/
+  platform: Auth0
+  platform_evidence: >-
+    login.oncolens.com is an Auth0 custom domain — DNS CNAME chain resolves through
+    oncolens-prod-cd-a5uiupzhjmdoqgm4.edge.tenants.us.auth0.com and oncolens-prod.us.auth0.com;
+    the discovery document also advertises Auth0-proprietary grant type URNs under
+    http://auth0.com/oauth/grant-type/.
+  tenant_region: us
+security_schemes:
+- key: openIdConnect
+  type: openIdConnect
+  openIdConnectUrl: https://login.oncolens.com/.well-known/openid-configuration
+  description: >-
+    OpenID Connect Discovery 1.0 / RFC 8414. Full authorization-server metadata is served
+    anonymously; the same payload is returned at /.well-known/oauth-authorization-server.
+- key: oauth2
+  type: oauth2
+  description: OAuth 2.0 authorization server backing the OIDC layer.
+  flows:
+    authorizationCode:
+      authorizationUrl: https://login.oncolens.com/authorize
+      tokenUrl: https://login.oncolens.com/oauth/token
+      refreshUrl: https://login.oncolens.com/oauth/token
+      pkce: required-capable
+      pkce_methods: [S256, plain]
+    clientCredentials:
+      tokenUrl: https://login.oncolens.com/oauth/token
+      note: >-
+        client_credentials is advertised in grant_types_supported. This is the grant a
+        machine-to-machine integration would use — but OncoLens documents no resource
+        API to call with the resulting token.
+    deviceCode:
+      deviceAuthorizationUrl: https://login.oncolens.com/oauth/device/code
+      tokenUrl: https://login.oncolens.com/oauth/token
+      grant: urn:ietf:params:oauth:grant-type:device_code
+    implicit:
+      authorizationUrl: https://login.oncolens.com/authorize
+      note: Advertised but legacy; PKCE authorization_code is the current recommendation.
+- key: saml2
+  type: saml
+  description: >-
+    Enterprise SAML 2.0 SSO observed on secure.oncolens.com, which 302s to
+    login.microsoftonline.com/4338d2c6-1192-445d-be9f-711a3dd11cac/saml2 with a SAMLRequest —
+    i.e. a Microsoft Entra ID federation for that surface.
+  evidence:
+    url: https://secure.oncolens.com/
+    http_status: 200
+    redirected_to: login.microsoftonline.com (SAML2 endpoint)
+endpoints:
+  authorization: https://login.oncolens.com/authorize
+  token: https://login.oncolens.com/oauth/token
+  userinfo: https://login.oncolens.com/userinfo
+  jwks: https://login.oncolens.com/.well-known/jwks.json
+  revocation: https://login.oncolens.com/oauth/revoke
+  device_authorization: https://login.oncolens.com/oauth/device/code
+  dynamic_client_registration: https://login.oncolens.com/oidc/register
+  backchannel_authentication: https://login.oncolens.com/bc-authorize
+  mfa_challenge: https://login.oncolens.com/mfa/challenge
+  global_token_revocation: https://login.oncolens.com/oauth/global-token-revocation/connection/{connectionName}
+token_characteristics:
+  id_token_signing_alg_values_supported: [HS256, RS256, PS256]
+  token_endpoint_auth_methods_supported:
+  - client_secret_basic
+  - client_secret_post
+  - private_key_jwt
+  - none
+  token_endpoint_auth_signing_alg_values_supported: [RS256, RS384, PS256]
+  dpop_signing_alg_values_supported: [ES256]
+  subject_types_supported: [public]
+  response_modes_supported: [query, fragment, form_post]
+  response_types_supported: [code, token, id_token, code token, code id_token, token id_token, code token id_token]
+grant_types_supported:
+- client_credentials
+- authorization_code
+- refresh_token
+- password
+- implicit
+- urn:ietf:params:oauth:grant-type:device_code
+- urn:ietf:params:oauth:grant-type:token-exchange
+- urn:ietf:params:oauth:grant-type:jwt-bearer
+- http://auth0.com/oauth/grant-type/password-realm
+- http://auth0.com/oauth/grant-type/passwordless/otp
+- http://auth0.com/oauth/grant-type/mfa-oob
+- http://auth0.com/oauth/grant-type/mfa-otp
+- http://auth0.com/oauth/grant-type/mfa-recovery-code
+mfa:
+  supported: true
+  evidence: >-
+    mfa_challenge_endpoint is present, and four Auth0 MFA grant types (mfa-oob, mfa-otp,
+    mfa-recovery-code, and the password-realm companion) are advertised.
+session_management:
+  backchannel_logout_supported: true
+  backchannel_logout_session_supported: true
+observations:
+- >-
+  Dynamic client registration is advertised at /oidc/register. Whether it is open or gated
+  was NOT tested — this pipeline does not attempt registration against a live production
+  identity provider.
+- >-
+  `none` appears in token_endpoint_auth_methods_supported, which is normal and correct for
+  public/SPA clients using PKCE, and is not on its own a weakness.
+- >-
+  The `password` and `implicit` grants remain enabled. Both are discouraged by OAuth 2.1 /
+  the OAuth Security BCP; this is Auth0 tenant default surface rather than a documented
+  OncoLens choice, and is recorded here as observed configuration only.
+checked: '2026-08-26'

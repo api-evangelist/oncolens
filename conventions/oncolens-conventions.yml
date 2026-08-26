@@ -1,0 +1,72 @@
+generated: '2026-08-26'
+method: derived
+source: >-
+  Derived from the absence of any public contract or developer documentation across every
+  OncoLens host, plus https://login.oncolens.com/.well-known/openid-configuration for the
+  auth style.
+name: OncoLens API conventions
+description: >-
+  OncoLens exposes no public API, so there are no cross-cutting runtime semantics to record.
+  Every dimension below is `na` — not zero. There is no write surface an agent could call, so
+  idempotency, dry-run and reversibility are inapplicable rather than missing. This file
+  exists to state that distinction explicitly rather than leave it to be inferred.
+applicable: false
+applicable_reason: no-public-api
+auth_style:
+  scheme: oidc-user-sign-in
+  detail: >-
+    Auth0-backed OpenID Connect at https://login.oncolens.com/ for interactive human sign-in
+    to the SaaS application. client_credentials is advertised by the authorization server but
+    no resource API is documented for a machine-to-machine token to call. See
+    authentication/oncolens-authentication.yml.
+  developer_api_keys: false
+idempotency:
+  status: 'na'
+  reason: No public write surface.
+  header: null
+  scope: null
+  retention: null
+pagination:
+  status: 'na'
+  style: null
+  params: []
+  response_fields: []
+field_expansion:
+  status: 'na'
+sparse_fieldsets:
+  status: 'na'
+metadata:
+  status: 'na'
+request_id_tracing:
+  status: 'na'
+versioning:
+  status: 'na'
+  detail: See lifecycle/oncolens-lifecycle.yml — no API versioning scheme is published.
+error_envelope:
+  status: 'na'
+  format: null
+  detail: >-
+    No error catalog or problem-details format exists to record; errors/ is intentionally
+    absent from this repo rather than populated with invented entries.
+rate_limit_signaling:
+  status: 'na'
+  detail: See rate-limits/oncolens-rate-limits.yml — limit_count 0.
+dry_run_mode:
+  status: 'na'
+  reason: No public write surface.
+reversibility:
+  status: 'na'
+  grade: 'na'
+  reason: >-
+    OncoLens publishes no API, therefore no write operations and no reversal operations.
+    There is nothing an agent could do on this provider's behalf that would need taking back.
+    This is an honest inapplicability, not an undocumented reversal path.
+  write_surfaces: []
+  reversal_operations: []
+cross_links:
+  authentication: authentication/oncolens-authentication.yml
+  scopes: scopes/oncolens-scopes.yml
+  lifecycle: lifecycle/oncolens-lifecycle.yml
+  rate_limits: rate-limits/oncolens-rate-limits.yml
+  conformance: conformance/oncolens-conformance.yml
+checked: '2026-08-26'

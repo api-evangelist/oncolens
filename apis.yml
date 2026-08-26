@@ -1,17 +1,42 @@
 aid: oncolens
 name: OncoLens
-description: 'OncoLens is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'OncoLens is an Atlanta, Georgia based AI-enabled digital healthcare platform
+  for oncology, delivering workflow and analytics software to cancer programs and life
+  science organizations. The platform extracts structured insight from unstructured clinical,
+  pathology and laboratory data in the EMR to power multidisciplinary tumor board and case
+  conference workflow, cancer registry abstraction and casefinding automation, accreditation
+  and quality-metric reporting (CoC, NAPBC, NAPRC, ASCO QOPI), biomarker and precision-medicine
+  tracking, real-world data analytics, and AI-assisted clinical trial matching and patient
+  identification. Through the OncoLens Research Network it connects cancer centers with
+  pharmaceutical and biotech sponsors for real-world data, quality improvement and
+  industry-sponsored trial initiatives. OncoLens reports 220+ cancer centers, 45,000+
+  multidisciplinary physicians and 5M+ oncology patients under care on the platform. The
+  product is delivered as a customer-facing SaaS application behind an Auth0-backed single
+  sign-on; OncoLens publishes no public developer portal, API reference, or machine-readable
+  API contract.'
+image: https://www.oncolens.com/wp-content/uploads/2022/10/ocl-logo-tm.svg
 url: https://raw.githubusercontent.com/api-evangelist/oncolens/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment-pipeline
 specificationVersion: '0.20'
 created: '2026-08-26'
 modified: '2026-08-26'
 tags:
 - Company
+- Healthcare
+- Oncology
+- Cancer Care
+- Clinical Trials
+- Health Data
+- Real World Data
+- Artificial Intelligence
+- Analytics
+- Clinical Workflow
+- Cancer Registry
+- Life Sciences
+- SaaS
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -19,5 +44,76 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: TrustCenter
+  url: security/oncolens-trust-center.yml
+- type: DomainSecurity
+  url: security/oncolens-domain-security.yml
 - type: Website
-  url: https://www.nasdaqprivatemarket.com/
+  url: https://www.oncolens.com/
+- type: Blog
+  url: https://www.oncolens.com/blog/
+- type: Support
+  url: https://www.oncolens.com/contact-us/
+- type: PrivacyPolicy
+  url: https://www.oncolens.com/privacy-policy/
+- type: Login
+  url: https://signin.oncolens.com/
+- type: GitHubOrganization
+  url: https://github.com/OncoLens
+- type: Compliance
+  url: conformance/oncolens-conformance.yml
+- type: Conformance
+  url: conformance/oncolens-conformance.yml
+- type: LLMsTxt
+  url: llms/oncolens-llms.txt
+- type: WellKnown
+  url: well-known/oncolens-well-known.yml
+- type: Authentication
+  url: authentication/oncolens-authentication.yml
+- type: OAuthScopes
+  url: scopes/oncolens-scopes.yml
+- type: OpenIDConnect
+  url: well-known/oncolens-login-openid-configuration.json
+- type: Plans
+  url: plans/oncolens-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/oncolens-rate-limits.yml
+- type: Lifecycle
+  url: lifecycle/oncolens-lifecycle.yml
+- type: Packages
+  url: packages/oncolens-packages.yml
+- type: Conventions
+  url: conventions/oncolens-conventions.yml
+x-enrichment:
+  date: '2026-08-26'
+  status: enriched
+  artifacts_added: 14
+  pass: local-v1
+x-coverage:
+  state: covered
+  reason: no-developer-program
+  detail: >-
+    OncoLens publishes no API of any kind — STEP 0b contract discovery found no OpenAPI,
+    GraphQL, MCP, A2A card, gRPC or WSDL on www.oncolens.com, app.oncolens.com,
+    login.oncolens.com or auth.services.oncolens.com, and docs./developer./api.oncolens.com
+    do not resolve in DNS at all; what it does serve anonymously is an OIDC discovery
+    document for user sign-in, a SafeBase trust center, and a Rank-Math-generated marketing
+    llms.txt, all of which were captured.
+  evidence:
+  - url: https://login.oncolens.com/.well-known/openid-configuration
+    status: 200
+  - url: https://www.oncolens.com/llms.txt
+    status: 200
+  - url: https://trust.oncolens.com/
+    status: 200
+  - url: https://www.oncolens.com/openapi.json
+    status: 404
+  - url: https://app.oncolens.com/openapi.json
+    status: 404
+  - url: https://www.oncolens.com/.well-known/agent-card.json
+    status: 404
+  - url: https://docs.oncolens.com/
+    status: 0
+  - url: https://api.oncolens.com/
+    status: 0
+  checked: '2026-08-26'

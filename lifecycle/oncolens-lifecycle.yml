@@ -1,0 +1,55 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  https://www.oncolens.com/ , https://www.oncolens.com/llms.txt , DNS probes across the
+  oncolens.com namespace
+name: OncoLens lifecycle and operational posture
+description: >-
+  Lifecycle posture for a provider with no public API. There is no API versioning scheme, no
+  deprecation policy, no Sunset/Deprecation header contract, no published SLA and no status
+  page. What OncoLens does maintain publicly is a dated news and blog stream, which is the
+  only change-communication surface it operates.
+api_versioning:
+  scheme: none
+  documented: false
+  note: No public API, therefore no version surface.
+deprecation_policy:
+  published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  note: >-
+    No deprecation, sunset or end-of-life policy is published on any OncoLens host.
+status_page:
+  published: false
+  probes:
+  - url: https://status.oncolens.com/
+    status: 0
+    note: DNS does not resolve.
+  - url: https://www.oncolens.com/status/
+    status: 404
+  note: >-
+    No status page, no uptime history and no incident feed. For a clinical-workflow platform
+    embedded in tumor board operations at 220+ cancer centers, this is the most consequential
+    operational gap in the profile.
+sla:
+  published: false
+  note: No public SLA, uptime commitment or support-response target.
+change_communication:
+  changelog: false
+  release_notes: false
+  news_feed:
+    url: https://www.oncolens.com/news/
+    http_status: 200
+    note: >-
+      Company news and press releases, dated but product-announcement shaped rather than a
+      release log.
+  blog:
+    url: https://www.oncolens.com/blog/
+    http_status: 200
+support:
+  email: support@oncolens.com
+  contact_page: https://www.oncolens.com/contact-us/
+  http_status: 200
+deprecated_operations: []
+checked: '2026-08-26'

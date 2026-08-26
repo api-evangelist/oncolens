@@ -1,0 +1,182 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  https://login.oncolens.com/.well-known/openid-configuration (machine-readable);
+  https://www.oncolens.com/ and https://www.oncolens.com/llms.txt (prose claims);
+  https://trust.oncolens.com/ (SafeBase trust portal, HTTP 200)
+name: OncoLens standards conformance
+description: >-
+  What OncoLens can be shown to conform to, separated strictly by evidence class. The
+  identity and transport standards below are demonstrated by a machine-readable document the
+  company serves anonymously. SOC 2 and HIPAA are published compliance entries on the
+  company's own SafeBase trust center. The oncology coding standards are prose claims on
+  marketing pages describing data the platform processes — none of them is declared inside a
+  published contract, because OncoLens publishes no API contract at all.
+regulatory_regime: health
+regulatory_regime_note: >-
+  OncoLens processes protected health information from EMRs on behalf of US cancer programs,
+  which places it inside the HIPAA / 21st Century Cures Act regime. It publishes no FHIR
+  CapabilityStatement, no US Core / USCDI declaration, no SMART on FHIR configuration and no
+  Bulk Data endpoint — the health-sector domain-standard surface is entirely absent from its
+  public footprint.
+entries:
+- id: oidc
+  label: OpenID Connect Discovery 1.0
+  conforms: true
+  evidence:
+    type: machine-readable
+    url: https://login.oncolens.com/.well-known/openid-configuration
+    http_status: 200
+    detail: >-
+      Complete OIDC Discovery document served anonymously on the company's own domain:
+      issuer, authorization/token/userinfo/jwks endpoints, 14 scopes_supported, standard
+      claims_supported, response_types_supported and id_token signing algorithms.
+- id: oauth2
+  label: OAuth 2.0 Authorization Server Metadata (RFC 8414)
+  conforms: true
+  evidence:
+    type: machine-readable
+    url: https://login.oncolens.com/.well-known/oauth-authorization-server
+    http_status: 200
+    detail: >-
+      RFC 8414 metadata served at the canonical path, with PKCE (S256), device authorization
+      grant (RFC 8628), token exchange (RFC 8693), JWT bearer (RFC 7523), token revocation
+      (RFC 7009), private_key_jwt client auth and DPoP (RFC 9449, ES256).
+- id: pkce
+  label: PKCE (RFC 7636)
+  conforms: true
+  evidence:
+    type: machine-readable
+    url: https://login.oncolens.com/.well-known/openid-configuration
+    http_status: 200
+    detail: 'code_challenge_methods_supported: [S256, plain]'
+- id: dpop
+  label: OAuth 2.0 Demonstrating Proof of Possession (RFC 9449)
+  conforms: true
+  evidence:
+    type: machine-readable
+    url: https://login.oncolens.com/.well-known/openid-configuration
+    http_status: 200
+    detail: 'dpop_signing_alg_values_supported: [ES256]'
+- id: saml2
+  label: SAML 2.0 Web Browser SSO
+  conforms: true
+  evidence:
+    type: probed
+    url: https://secure.oncolens.com/
+    http_status: 200
+    detail: >-
+      Redirects to a Microsoft Entra ID SAML2 endpoint with a SAMLRequest, demonstrating an
+      enterprise SAML federation on that surface.
+- id: soc2
+  label: SOC 2
+  conforms: claimed
+  evidence:
+    type: trust-center
+    url: https://trust.oncolens.com/
+    http_status: 200
+    detail: >-
+      A SOC 2 compliance entry is published at full maturity on the OncoLens SafeBase trust
+      center, with an attached "SOC 2 Report" document. The report file is not shared
+      publicly, so report type (Type I vs Type II), auditor and audit period could not be
+      established anonymously. A "SOC2 Certified" badge image also appears in the
+      www.oncolens.com footer, unlinked.
+- id: hipaa
+  label: HIPAA
+  conforms: claimed
+  evidence:
+    type: trust-center
+    url: https://trust.oncolens.com/
+    http_status: 200
+    detail: >-
+      A HIPAA compliance entry is published at full maturity on the SafeBase trust center.
+      The separate "HIPAA Report" document slot is disabled, so no attestation artifact is
+      offered. No BAA language or HIPAA page appears on www.oncolens.com. OncoLens processes
+      clinical, pathology and biomarker data from customer EMRs, which makes it a HIPAA
+      business associate in practice.
+- id: fhir
+  label: HL7 FHIR
+  conforms: false
+  evidence:
+    type: absence
+    url: https://www.oncolens.com/llms.txt
+    http_status: 200
+    detail: >-
+      No FHIR CapabilityStatement, /metadata endpoint, US Core / USCDI declaration,
+      SMART on FHIR .well-known/smart-configuration, or Bulk Data surface on any OncoLens
+      host. The published page inventory in llms.txt contains no developer, API, FHIR or
+      interoperability page.
+- id: hl7-v2
+  label: HL7 v2 messaging
+  conforms: unknown
+  evidence:
+    type: absence
+    url: https://www.oncolens.com/llms.txt
+    http_status: 200
+    detail: >-
+      OncoLens states it "integrates with leading EMRs" but names no interface standard
+      publicly. Whether ingestion is HL7 v2, FHIR, flat-file or vendor-specific is not
+      disclosed on any public page.
+- id: rfc9457
+  label: RFC 9457 Problem Details
+  conforms: 'na'
+  evidence:
+    type: absence
+    detail: No public API surface, therefore no error envelope to evaluate.
+domain_standards:
+  note: >-
+    REWARD-ONLY check. The oncology coding standards below are named on OncoLens product
+    pages as data elements the platform EXTRACTS and reports on. That is a data-processing
+    capability, not a contract declaring conformance, and it is recorded here as such — none
+    of them appear in a machine-readable artifact OncoLens publishes.
+  declared_in_contract: false
+  named_in_docs:
+  - id: icd-o-3
+    label: ICD-O-3 topography and morphology codes
+    source: https://www.oncolens.com/providers/registry-automation/
+  - id: icd-10
+    label: ICD-10 codes
+    source: https://www.oncolens.com/providers/registry-automation/
+  - id: ajcc-tnm
+    label: AJCC TNM staging / stage group
+    source: https://www.oncolens.com/providers/registry-automation/
+  - id: coc
+    label: Commission on Cancer (CoC) accreditation quality standards
+    source: https://www.oncolens.com/providers/accreditation-support/
+  - id: napbc
+    label: National Accreditation Program for Breast Centers (NAPBC)
+    source: https://www.oncolens.com/blog/
+  - id: naprc
+    label: National Accreditation Program for Rectal Cancer (NAPRC)
+    source: https://www.oncolens.com/blog/
+  - id: asco-qopi
+    label: ASCO Quality Oncology Practice Initiative (QOPI)
+    source: https://www.oncolens.com/blog/
+  - id: nccn
+    label: NCCN guideline-based biomarker testing
+    source: https://www.oncolens.com/providers/research-network/
+compliance:
+  published: true
+  certifications:
+  - name: SOC 2
+    status: published
+    report_available: gated
+    source: https://trust.oncolens.com/
+  - name: HIPAA
+    status: published
+    report_available: false
+    source: https://trust.oncolens.com/
+  trust_center:
+    url: https://trust.oncolens.com/
+    platform: SafeBase
+    platform_evidence: 'DNS CNAME: trust.oncolens.com -> oncolens.portals.safebase.io'
+    readable: true
+    http_status: 200
+    note: >-
+      A real SafeBase trust center publishing SOC 2 and HIPAA compliance entries plus 38
+      named security controls (33 at full maturity). Reports are gated behind SafeBase
+      request/NDA flow. A desktop-browser User-Agent is answered with a Cloudflare
+      interactive challenge (403); a plain library User-Agent is served the page (200) —
+      the 403 is a bot-fingerprint edge policy, not an access wall. Full detail in
+      security/oncolens-trust-center.yml.
+checked: '2026-08-26'

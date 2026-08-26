@@ -1,0 +1,78 @@
+generated: '2026-08-26'
+method: probed
+source: 'Direct unauthenticated GET of /.well-known/* on every OncoLens host discovered
+  during enrichment (www.oncolens.com, app.oncolens.com, login.oncolens.com).'
+name: OncoLens well-known documents
+description: >-
+  Probe of the RFC 8615 /.well-known/ namespace across every OncoLens host. Two real
+  documents are served, both from login.oncolens.com — the OncoLens single sign-on
+  origin, an Auth0 custom domain (CNAME oncolens-prod-cd-a5uiupzhjmdoqgm4.edge.tenants.us.auth0.com)
+  operated on the company's own domain. No security.txt, api-catalog, ai-plugin.json,
+  agent-card.json or agent.json is served on any host.
+hosts:
+- host: login.oncolens.com
+  note: >-
+    OncoLens single sign-on origin. Auth0 custom domain on the oncolens.com apex, so the
+    OIDC discovery document is served by a host OncoLens controls even though the
+    implementation is Auth0's. Both documents returned are byte-identical.
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: application/json; charset=utf-8
+    file: oncolens-login-openid-configuration.json
+    note: >-
+      OpenID Connect Discovery 1.0 document. issuer https://login.oncolens.com/,
+      14 scopes_supported, 13 grant_types_supported (including client_credentials,
+      authorization_code, refresh_token, device_code, token-exchange and jwt-bearer),
+      PKCE S256, DPoP (ES256), private_key_jwt client auth, dynamic client registration
+      at /oidc/register, and back-channel logout.
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json; charset=utf-8
+    file: oncolens-login-oauth-authorization-server.json
+    note: RFC 8414 authorization server metadata; identical payload to the OIDC document.
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+- host: www.oncolens.com
+  note: WordPress marketing site (origin wp.oncolens.com). Every /.well-known/ path returns the site 404 template.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: app.oncolens.com
+  note: >-
+    Static redirect shim (335 bytes of HTML) that JavaScript-redirects to
+    https://signin.oncolens.com. Every /.well-known/ path returns a 404 HTML page.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: auth.services.oncolens.com
+  note: >-
+    Authorization relay that signin.oncolens.com 302s to. Root and both OAuth metadata
+    paths return an empty 404; the authoritative metadata lives on login.oncolens.com,
+    which this host names as its `iss`.
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+checked: '2026-08-26'

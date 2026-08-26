@@ -1,0 +1,80 @@
+generated: '2026-08-26'
+method: probed
+source: https://login.oncolens.com/.well-known/openid-configuration
+name: OncoLens OAuth / OIDC scopes
+description: >-
+  The complete scopes_supported list published by the OncoLens authorization server at
+  login.oncolens.com. These are OpenID Connect standard and Auth0 profile-claim scopes for
+  the sign-in flow — they are identity scopes, not product-resource scopes. OncoLens
+  publishes no API resource scopes (no read:cases, write:tumor_board or similar), because it
+  publishes no API. No scopes reference PHI, patient records, tumor boards, registry data or
+  clinical trials.
+docs: null
+docs_note: >-
+  OncoLens publishes no scope reference or permissions documentation page. The list below is
+  read directly from the machine-readable discovery document, which is the only published
+  source.
+authorization_server: https://login.oncolens.com/
+scope_count: 14
+resource_scope_count: 0
+scopes:
+- name: openid
+  description: Required to issue an ID token; signals an OpenID Connect request.
+  standard: OpenID Connect Core 1.0
+- name: profile
+  description: Basic profile claims (name, given_name, family_name, nickname, picture, updated_at).
+  standard: OpenID Connect Core 1.0
+- name: email
+  description: The end user's email address claim.
+  standard: OpenID Connect Core 1.0
+- name: email_verified
+  description: Whether the end user's email address has been verified.
+  standard: Auth0 profile claim
+- name: address
+  description: The end user's postal address claim.
+  standard: OpenID Connect Core 1.0
+- name: phone
+  description: The end user's phone number and verification status.
+  standard: OpenID Connect Core 1.0
+- name: offline_access
+  description: Requests a refresh token so the client can obtain new access tokens without the user present.
+  standard: OpenID Connect Core 1.0
+- name: name
+  description: Full display name claim.
+  standard: Auth0 profile claim
+- name: given_name
+  description: First name claim.
+  standard: Auth0 profile claim
+- name: family_name
+  description: Last name claim.
+  standard: Auth0 profile claim
+- name: nickname
+  description: Nickname / short display name claim.
+  standard: Auth0 profile claim
+- name: picture
+  description: Profile picture URL claim.
+  standard: Auth0 profile claim
+- name: created_at
+  description: Account creation timestamp claim.
+  standard: Auth0 profile claim
+- name: identities
+  description: Linked identity-provider connections for the account.
+  standard: Auth0 profile claim
+claims_supported:
+- aud
+- auth_time
+- created_at
+- email
+- email_verified
+- exp
+- family_name
+- given_name
+- iat
+- identities
+- iss
+- name
+- nickname
+- phone_number
+- picture
+- sub
+checked: '2026-08-26'
