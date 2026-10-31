@@ -64,5 +64,103 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-OncoLens is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+OncoLens is an Atlanta, Georgia based AI-enabled digital healthcare platform for oncology, delivering workflow and analytics software to cancer programs and life science organizations. The platform extracts structured insight from unstructured clinical, pathology and laboratory data in the EMR to power multidisciplinary tumor board and case conference workflow, cancer registry abstraction and casefinding automation, accreditation and quality-metric reporting (CoC, NAPBC, NAPRC, ASCO QOPI), biomarker and precision-medicine tracking, real-world data analytics, and AI-assisted clinical trial matching and patient identification. Through the OncoLens Research Network it connects cancer centers with pharmaceutical and biotech sponsors for real-world data, quality improvement and industry-sponsored trial initiatives. OncoLens reports 220+ cancer centers, 45,000+ multidisciplinary physicians and 5M+ oncology patients under care on the platform. The product is delivered as a customer-facing SaaS application behind an Auth0-backed single sign-on; OncoLens publishes no public developer portal, API reference, or machine-readable API contract.
+
+**Areas:** Company · Healthcare · Oncology · Cancer Care · Clinical Trials · Health Data · Real-World Data · Artificial Intelligence · Analytics · Clinical Workflow · Cancer Registry · Life Sciences
+
+## OncoLens on APIs.io
+
+Everything profiled for OncoLens is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/oncolens/](https://apis.io/providers/oncolens/)** — or go straight to one of the APIs or properties below.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Oncolens Authentication](https://apis.io/security/oncolens/oncolens-authentication/)
+- [Oncolens Domain Security](https://apis.io/security/oncolens/oncolens-domain-security/)
+- [Oncolens Trust Center](https://apis.io/security/oncolens/oncolens-trust-center/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Oncolens Scopes](https://apis.io/scopes/oncolens/oncolens-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Oncolens Plans Pricing](https://apis.io/plans/oncolens/oncolens-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Oncolens Rate Limits](https://apis.io/rate-limits/oncolens/oncolens-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.oncolens.com/)
+- [Support](https://www.oncolens.com/contact-us/)
+- [Blog](https://www.oncolens.com/blog/)
+- [Privacy policy](https://www.oncolens.com/privacy-policy/)
+- [GitHub](https://github.com/OncoLens)
+
+## API Evangelist rating
+
+**Kin Score 19.8** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 55.4 |
+| Contract quality | 0.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 32.9 |
+
+**Agent readiness 17.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+
+**Regulatory alignment 36.0** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/oncolens/](https://apis.io/providers/oncolens/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for OncoLens: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/oncolens/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
